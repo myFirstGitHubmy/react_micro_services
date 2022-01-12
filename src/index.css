@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.row-block-start{
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.row-block-end{
+  margin-left: 1rem;
+  display: flex;
+  text-align: center;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: row;
+}
+
+.m-1 li{
+  margin-left: 1px;
+}
+
+.show-pass-btn,.show-pass-btn:active,.show-pass-btn:focus {
+  margin: 5px;
+  border: none;
+  background: white;
+  outline: none;
+}
+

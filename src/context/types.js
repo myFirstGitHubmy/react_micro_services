@@ -1,0 +1,5 @@
+export const SHOW_ALERT = 'SHOW_ALERT'
+export const HIDE_ALERT = 'HIDE_ALERT'
+export const ALL_USERS = 'ALL_USERS'
+export const NEW_USER = 'NEW_USER'
+export const AUTH_USER = 'AUTH_USER'
