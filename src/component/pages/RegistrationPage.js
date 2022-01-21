@@ -22,7 +22,7 @@ export const RegistrationPage = () => {
                     password: password,
                     email: email
                 })
-                .then(res => console.log("1"))
+                .then(res => console.log(res))
                 .catch(res => console.log(res))
     }
 

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import {NavLink} from "react-router-dom";
+import {DatabaseContext} from "../context/database/databaseContext";
 
-export const Navbar = () => {
+export const Navbar = (props) => {
+    const data = useContext(DatabaseContext)
+    console.log(props.isAuth)
     return (<nav className="navbar navbar-dark bg-primary">
         <div className="navbar-brand">
             App
@@ -26,22 +29,27 @@ export const Navbar = () => {
             </li>
         </ul>
         <ul className="navbar-nav container-lg row-block-end m-1">
-            <li className="nav-item">
-                <NavLink
-                    className="nav-link"
-                    to="/login"
-                >
-                    <h5><span className="badge badge-secondary">Log in</span></h5>
-                </NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink
-                    className="nav-link"
-                    to="/logout"
-                >
-                    <h5><span className="badge badge-secondary">Log out</span></h5>
-                </NavLink>
-            </li>
+            {!props.isAuth ?
+                <li className="nav-item">
+                    <NavLink
+                        className="nav-link"
+                        to="/login"
+                    >
+                        <h5><span className="badge badge-secondary">Log in</span></h5>
+                    </NavLink>
+                </li>
+                :
+                <li className="nav-item">
+                    <NavLink
+                        className="nav-link"
+                        to="/"
+                    >
+                        <h5><span className="badge badge-secondary" onClick={data.logoutUser}>Log out</span></h5>
+                    </NavLink>
+                </li>
+            }
+
+
             <li className="nav-item">
                 <NavLink
                     className="nav-link"

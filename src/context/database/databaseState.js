@@ -2,7 +2,7 @@ import React, {useReducer} from "react";
 import {DatabaseContext} from "./databaseContext";
 import {databaseReducer} from "./databaseReducer";
 import axios from "axios"
-import {ALL_USERS, AUTH_USER, NEW_USER} from "../types";
+import {ALL_USERS, AUTH_USER, LOGOUT, NEW_USER} from "../types";
 
 export const DatabaseState = ({children}) => {
     const initial = {
@@ -57,11 +57,16 @@ export const DatabaseState = ({children}) => {
         dispatch({type:NEW_USER, payload})
     }
 
+    const logoutUser = async () => {
+        dispatch({type: LOGOUT})
+    }
+
     return (
         <DatabaseContext.Provider
             value={
                 {users: state.users,
                 allUsers,
+                logoutUser,
                 createUser,
                 authorizationUser,
                 isAuth: state.isAuth}

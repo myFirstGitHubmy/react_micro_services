@@ -6,23 +6,16 @@ import MainPage from "./MainPage";
 import AboutPage from "./AboutPage";
 import {RegistrationPage} from "./RegistrationPage";
 import {DatabaseContext} from "../../context/database/databaseContext";
+import {AlertContext} from "../../context/alert/AlertContext";
 
 export default function AuthPage(){
     const database = useContext(DatabaseContext)
+    const {show} = useContext(AlertContext)
     const loggedIn = database.isAuth
-    console.log(loggedIn)
-    console.log(database.authUser)
     return (
         <div>
-            {!loggedIn? <Routes>
-                    <Route
-                        exact
-                        path="/"
-                        element={<LoginPage/>}
-                    />
-                </Routes> :
+            <Navbar isAuth={loggedIn}/>
                 <div>
-                    <Navbar/>
                     <Routes>
                         <Route
                             exact
@@ -31,10 +24,10 @@ export default function AuthPage(){
                         />
                         <Route path="/about" element={<AboutPage/>} />
                         <Route path="/login" element={<LoginPage/>} />
-                        <Route path="/logout" element={<LoginPage/>} />
+                        <Route path="/" element={<LoginPage/>} />
                         <Route path="/new" element={<RegistrationPage/>}/>
                     </Routes>
-                </div>}
+                </div>
         </div>
     )
 }

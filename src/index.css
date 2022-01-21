@@ -30,7 +30,7 @@ code {
 }
 
 .m-1 li{
-  margin-left: 1px;
+  margin-left: 5px;
 }
 
 .show-pass-btn,.show-pass-btn:active,.show-pass-btn:focus {
@@ -38,5 +38,23 @@ code {
   border: none;
   background: white;
   outline: none;
+}
+
+.login-form {
+  display: block;
+  margin: 1rem;
+  position: relative;
+}
+
+.login-form-control {
+  display: block;
+  margin: 1rem;
+  position: absolute;
+  top: 75%;
+  left: 25%;
+}
+
+ul li {
+  margin-left: 1rem;
 }
 

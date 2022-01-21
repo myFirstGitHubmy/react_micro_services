@@ -2,6 +2,8 @@ import React, {useContext, useState} from "react";
 import {DatabaseContext} from "../../context/database/databaseContext";
 import {Alert} from "../alert/Alert";
 import {AlertContext} from "../../context/alert/AlertContext";
+import {Link, Route, Routes} from "react-router-dom";
+import {RegistrationPage} from "./RegistrationPage";
 
 
 export const LoginPage = () => {
@@ -29,16 +31,18 @@ export const LoginPage = () => {
                     password: password,
                     email: email
                 })
-                .then(res => show('Successfully authorization user', 'success'))
+                .then(res => {
+                        show('Successfully authorization user', 'success')
+                })
                 .catch(res => show('incorrected login or password','danger'))
         data.allUsers()
-            .then(res => console.log("Successfully updates of users"))
+            .then(res => console.log("qwe"))
     }
 
 
     return (
-        <div className="justify-content-center align-items-center flex-md-column">
-            <div className="align-content-lg-center col-sm-5 text-center align-items-center">
+        <div className="justify-content-center align-items-center flex-md-column login-form">
+            <div className="align-content-lg-center col-sm-5 text-center align-items-center login-form-control">
                 <form onSubmit={e => e.preventDefault()}>
                     <Alert/>
                     <div className="align-content-center">
@@ -78,17 +82,15 @@ export const LoginPage = () => {
                             </div>
                             <div>
                                 <button className="btn btn-primary" type="submit" onClick={logIn}>Вход</button>
-                                <button className="btn btn-primary m-3" type="submit"
-                                        onClick={() =>
-                                           this.props.history.push('/new')
-                                        }>Регистрация пользователя
+                                <button className="btn btn-primary m-3"
+                                        onClick={null}
+                                        >Регистрация пользователя
                                 </button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-
         </div>
     )
 }
