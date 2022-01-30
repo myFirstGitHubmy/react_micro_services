@@ -9,13 +9,16 @@ import {RegistrationPage} from "./RegistrationPage";
 export const LoginPage = () => {
     const data = useContext(DatabaseContext)
     const {show, hide} = useContext(AlertContext)
-    const [login, setLogin] = useState('')
-    const [password, setPass] = useState('')
-    const [email, setEmail] = useState('')
+    const [form, setForm] = useState({login: ''})
     const [visiblePass, setVisiblePass] = useState(false)
 
     const handleVisible = (event) => {
         setVisiblePass(event.target.checked)
+    }
+
+    const handleForm = (event) => {
+        const authForm = {...form, [event.target.name]: event.target.value, name: form.login}
+        setForm(authForm)
     }
 
     const onChecked = () => {
@@ -23,14 +26,8 @@ export const LoginPage = () => {
     }
 
     const logIn = () => {
-        if (login !== '' && password !== '' && email !== '')
-            data.authorizationUser(
-                {
-                    name: login,
-                    login: login,
-                    password: password,
-                    email: email
-                })
+        if (form.login !== '' && form.password !== '' && form.email !== '')
+            data.authorizationUser(form)
                 .then(res => {
                         show('Successfully authorization user', 'success')
                 })
@@ -53,19 +50,19 @@ export const LoginPage = () => {
                             <div className="form-group row">
                                 <label htmlFor="inputLogin" className="col-sm-2 col-form-label">Login</label>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control" id="inputLogin" placeholder="Login"
-                                           onChange={e => setLogin(e.target.value)}/>
+                                    <input type="text" className="form-control" name="login" id="login" placeholder="Login"
+                                           onChange={e => handleForm(e)}/>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
                                 <div className="col-sm-10 form-group">
                                     {visiblePass ?
-                                        <input type="text" className="form-control" id="inputPassword"
-                                               placeholder="Password" onChange={e => setPass(e.target.value)}/>
+                                        <input type="text" className="form-control" name="password" id="password"
+                                               placeholder="Password" onChange={e => handleForm(e)}/>
                                         :
-                                        <input type="password" className="form-control" id="inputPassword"
-                                               placeholder="Password" onChange={e => setPass(e.target.value)}/>
+                                        <input type="password" className="form-control" name="password" id="password"
+                                               placeholder="Password" onChange={e => handleForm(e)}/>
                                     }
                                         <button className="show-pass-btn" onClick={onChecked}>
                                             <input type="checkbox" checked={visiblePass} onChange={e => handleVisible(e)}/>
@@ -76,8 +73,8 @@ export const LoginPage = () => {
                             <div className="form-group row">
                                 <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email</label>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control" id="staticEmail"
-                                           placeholder="email@example.com" onChange={e => setEmail(e.target.value)}/>
+                                    <input type="text" className="form-control" name="email" id="email"
+                                           placeholder="email@example.com" onChange={e => handleForm(e)}/>
                                 </div>
                             </div>
                             <div>

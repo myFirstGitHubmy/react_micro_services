@@ -4,24 +4,21 @@ import {DatabaseContext} from "../../context/database/databaseContext";
 
 export const RegistrationPage = () => {
     const data = useContext(DatabaseContext)
-    const [login, setLogin] = useState('')
-    const [password, setPass] = useState('')
-    const [email, setEmail] = useState('')
+    const [form, setForm] = useState({})
     const [visiblePass, setVisiblePass] = useState(false)
 
     const handleVisible = (event) => {
         setVisiblePass(event.target.checked)
     }
 
+    const handleForm = (event) => {
+        console.log({...form, [event.target.name]: event.target.value, name: form.login})
+        setForm({...form, [event.target.name]: event.target.value, name: form.login})
+    }
+
     const create_new_user = () => {
-        if (login !== '' && password !== '' && email !== '')
-            data.createUser(
-                {
-                    name: login,
-                    login: login,
-                    password: password,
-                    email: email
-                })
+        if (form.login !== '' && form.password !== '' && form.email !== '')
+            data.createUser(form)
                 .then(res => console.log(res))
                 .catch(res => console.log(res))
     }
@@ -38,19 +35,19 @@ export const RegistrationPage = () => {
                             <div className="form-group row">
                                 <label htmlFor="inputLogin" className="col-sm-2 col-form-label">Login</label>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control" id="inputLogin" placeholder="Login"
-                                           onChange={e => setLogin(e.target.value)}/>
+                                    <input type="text" className="form-control" name='login' id="inputLogin" placeholder="Login"
+                                           onChange={e => handleForm(e)}/>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
                                 <div className="col-sm-10">
                                     {visiblePass ?
-                                        <input type="text" className="form-control" id="inputPassword"
-                                               placeholder="Password" onChange={e => setPass(e.target.value)}/>
+                                        <input type="text" className="form-control" name="password" id="inputPassword"
+                                               placeholder="Password" onChange={e => handleForm(e)}/>
                                         :
-                                        <input type="password" className="form-control" id="inputPassword"
-                                               placeholder="Password" onChange={e => setPass(e.target.value)}/>
+                                        <input type="password" className="form-control" name="password" id="inputPassword"
+                                               placeholder="Password" onChange={e => handleForm(e)}/>
                                     }
 
                                     <input type="checkbox" onChange={e => handleVisible(e)}/>
@@ -60,8 +57,8 @@ export const RegistrationPage = () => {
                             <div className="form-group row">
                                 <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email</label>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control" id="staticEmail"
-                                           placeholder="email@example.com" onChange={e => setEmail(e.target.value)}/>
+                                    <input type="text" className="form-control" name="email" id="staticEmail"
+                                           placeholder="email@example.com" onChange={e => handleForm(e)}/>
                                 </div>
                             </div>
                             <button className="btn btn-primary" type="submit" onClick={create_new_user}>Создать</button>

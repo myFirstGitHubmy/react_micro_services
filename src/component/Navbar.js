@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import {NavLink} from "react-router-dom";
 import {DatabaseContext} from "../context/database/databaseContext";
+import MenuUserPage from "./burger/MenuUserPage";
 
 export const Navbar = (props) => {
     const data = useContext(DatabaseContext)
+    const user = data.currentUser
+    console.log(user)
     console.log(props.isAuth)
-    return (<nav className="navbar navbar-dark bg-primary">
+    return (<nav className="navbar-height navbar navbar-dark bg-primary">
         <div className="navbar-brand">
             App
         </div>
@@ -56,6 +59,21 @@ export const Navbar = (props) => {
                     to="/new"
                 >
                     <h5><span className="badge badge-secondary">Reg</span></h5>
+                </NavLink>
+            </li>
+
+            <li className="nav-item">
+                <NavLink
+                    className="nav-link"
+                    to="/menuUser"
+                >
+                    <div className="dropdown">
+                    <button className="btn badge btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {user.data.name}
+                    </button>
+                        <MenuUserPage />
+                    </div>
                 </NavLink>
             </li>
         </ul>
