@@ -4,14 +4,17 @@ import './App.css';
 import {DatabaseState} from "./context/database/databaseState";
 import AuthPage from "./component/pages/AuthPage";
 import {AlertState} from "./context/alert/AlertState";
+import {NotesState} from "./context/notes/notesState";
 
 export default function App() {
     return (
         <DatabaseState>
             <AlertState>
-                <BrowserRouter>
-                    <AuthPage/>
-                </BrowserRouter>
+                <NotesState>
+                    <BrowserRouter>
+                        <AuthPage/>
+                    </BrowserRouter>
+                </NotesState>
             </AlertState>
         </DatabaseState>
     );

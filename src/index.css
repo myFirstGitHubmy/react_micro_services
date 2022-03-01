@@ -95,7 +95,6 @@ ul li {
   height: auto;
   width: 100%;
   z-index: 999999;
-  position: fixed;
 }
 
 /*.nav-show:hover {*/

@@ -70,7 +70,7 @@ export const Navbar = (props) => {
                     <div className="dropdown">
                     <button className="btn badge btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {user.data.name}
+                        {props.isAuth ? user.data.name : null}
                     </button>
                         <MenuUserPage />
                     </div>
